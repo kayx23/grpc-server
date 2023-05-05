@@ -42,7 +42,7 @@ $ grpcurl -plaintext  -proto "client.proto" "127.0.0.1:50051" "VoidHelloService/
 
 The reflection API in gRPC allows clients to query a gRPC server for information about its services, methods, and message types at runtime, **without needing to know the specific details of the protobuf message definitions** or the gRPC service implementation.
 
-This example gRPC server did not implement a reflection API.
+This example gRPC server did not implement [reflection](https://github.com/grpc/grpc/blob/master/doc/server-reflection.md#grpc-server-reflection-protocol).
 
 Specifically, if you send a request without a corresponding `.proto` file on the client side, you get an error: 
 ```
