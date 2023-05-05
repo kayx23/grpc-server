@@ -1,5 +1,5 @@
 ## NodeJS gRPC Server
-A minimalistic example of gRPC Server in NodeJS with two services.
+A minimalistic gRPC Server in NodeJS with two services.
 
 ## Quick Start
 
@@ -42,17 +42,9 @@ $ grpcurl -plaintext  -proto "client.proto" "127.0.0.1:50051" "VoidHelloService/
 
 The reflection API in gRPC allows clients to query a gRPC server for information about its services, methods, and message types at runtime, **without needing to know the specific details of the protobuf message definitions** or the gRPC service implementation.
 
-This Node.js implementation of gRPC server did not implement a reflection API.
+This example gRPC server did not implement a reflection API.
 
-With `.proto` file:
-```
-$ grpcurl -plaintext -d '{"name": "Bob"}' -proto "client.proto" "127.0.0.1:50051" "HelloService/SayHello"
-{
-  "reply": "Hello, Bob!"
-}
-```
-
-Without `.proto` file:
+Specifically, if you send a request without a corresponding `.proto` file on the client side, you get an error: 
 ```
 $ grpcurl -plaintext "127.0.0.1:50051" "HelloService/SayHello" 
 
