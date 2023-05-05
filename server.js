@@ -3,7 +3,7 @@ const protoLoader = require('@grpc/proto-loader');
 
 // Load the protobuf definition for the gRPC service
 const packageDefinition = protoLoader.loadSync(['hello.proto'], {
-    defaults: true, // use Proto2 syntax
+    defaults: false, // default:true for proto2
     keepCase: true, // preserve field names case
     longs: String, // use string for longs
     enums: String, // use string for enums
