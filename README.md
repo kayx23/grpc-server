@@ -1,19 +1,42 @@
 ## NodeJS gRPC Server
-A minimalistic example for testing.
+A minimalistic example of gRPC Server in NodeJS with two services.
 
-## Quickstart
+## Quick Start
 
-1. Install Node dependencies.
+1. Install dependencies.
 ```
 npm i
 ```
 
-2. Install grpcurl. On macOS:
+2. Install `grpcurl` utility. On macOS:
 ```
 brew install grpcurl
 ```
 
-3. Save a copy of `hello.proto` file to the working directory.
+3. Create the corresponding protobuf file (e.g. copy paste `hello.proto` into `client.proto`) on the client side containing protocol buffers you would like to use to communicate with the server. This is mandatory as the server did not implement a [reflection API](#reflection-api). 
+
+4. Start server
+```
+node server.js
+```
+
+## Examples
+
+Send a request to `HelloService` which takes an input, `name`:
+```
+$ grpcurl -plaintext -d '{"name": "Bob"}' -proto "client.proto" "127.0.0.1:50051" "HelloService/SayHello"
+{
+  "reply": "Hello, Bob!"
+}
+```
+
+Send a request to `VoidHelloService` which does not take any input:
+```
+$ grpcurl -plaintext  -proto "client.proto" "127.0.0.1:50051" "VoidHelloService/SayHello"
+{
+  "reply": "Hello anonymous!"
+}
+```
 
 ## Reflection API
 
@@ -23,7 +46,7 @@ This Node.js implementation of gRPC server did not implement a reflection API.
 
 With `.proto` file:
 ```
-$ grpcurl -plaintext -d '{"name": "Bob"}' -proto "hello.proto" "127.0.0.1:50051" "HelloService/SayHello"
+$ grpcurl -plaintext -d '{"name": "Bob"}' -proto "client.proto" "127.0.0.1:50051" "HelloService/SayHello"
 {
   "reply": "Hello, Bob!"
 }
@@ -35,4 +58,3 @@ $ grpcurl -plaintext "127.0.0.1:50051" "HelloService/SayHello"
 
 Error invoking method "HelloService/SayHello": failed to query for service descriptor "HelloService": server does not support the reflection API
 ```
-

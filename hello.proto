@@ -4,6 +4,10 @@ service HelloService {
   rpc SayHello (HelloRequest) returns (HelloResponse);
 }
 
+service VoidHelloService {
+  rpc SayHello (Void) returns (HelloResponse);
+}
+
 message HelloRequest {
   string name = 1;
 }
@@ -11,3 +15,5 @@ message HelloRequest {
 message HelloResponse {
   string reply = 1;
 }
+
+message Void { }
